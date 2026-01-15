@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Code, Menu, X} from 'lucide-react'
 import {NAV_LINKS, PERSONAL_INFO} from '../../utils/constants'
-import {useScrollSpy, scrollTOSection} from '../../hooks/useScrollSpy'
+import {useScrollSpy, scrollToSection } from '../../hooks/useScrollSpy'
 
 const Navbar = () => {
 
@@ -21,7 +21,7 @@ const Navbar = () => {
     }, []);
 
     const handleNavClick = (sectionId) => {
-        scrollTOSection(sectionId);
+        scrollToSection(sectionId);
         setIsMenuOpen(false);
     };
     return (

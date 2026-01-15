@@ -1,9 +1,9 @@
-import { 
-  Code2, 
-  Database, 
-  Globe, 
-  Smartphone, 
-  Server, 
+import {
+  Code2,
+  Database,
+  Globe,
+  Smartphone,
+  Server,
   GitBranch,
   Layout,
   Palette,

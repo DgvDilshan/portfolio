@@ -1,4 +1,6 @@
+// ==============================
 // Personal Information
+// ==============================
 export const PERSONAL_INFO = {
   name: "Vimukthi Dilshan",
   nickname: "Vimu",
@@ -12,34 +14,69 @@ export const PERSONAL_INFO = {
   facebook: "https://www.facebook.com/vimukthi.dilshan.182",
   instagram: "https://instagram.com/vimukthidilshanudg",
   hackerrank: "https://www.hackerrank.com/profile/vimukthidilshan2",
-  portfolio: "https://mycurriculum123.000webhostapp.com/"
+  portfolio: "https://mycurriculum123.000webhostapp.com/",
+  bio: [
+    "I'm a passionate Software Engineering undergraduate at NSBM Green University, specializing in full-stack web development with a focus on React.js and modern JavaScript frameworks.",
+    "With over 2 years of learning experience, I've completed 15+ projects utilizing various technologies including React, Node.js, MongoDB, and Flutter. I'm dedicated to creating clean, efficient, and user-friendly applications.",
+    "When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and solving algorithmic challenges on platforms like HackerRank."
+  ],
+  resume: "/resume.pdf"
 };
 
-// Navigation Links
-export const NAV_LINKS = [
+// ==============================
+// Hero Section Stats
+// ==============================
+export const STATS = [
   {
-    id: "about",
-    label: "About"
+    value: "2+",
+    label: "Years of Learning"
   },
   {
-    id: "skills",
-    label: "Skills"
+    value: "15+",
+    label: "Projects Completed"
   },
   {
-    id: "projects",
-    label: "Projects"
+    value: "10+",
+    label: "Technologies Used"
   },
   {
-    id: "services",
-    label: "Services"
-  },
-  {
-    id: "contact",
-    label: "Contact"
+    value: "100%",
+    label: "Passion for Coding"
   }
 ];
 
+// ==============================
+// About Section Stats
+// ==============================
+export const ABOUT_STATS = [
+  {
+    value: "2+",
+    label: "Years Experience"
+  },
+  {
+    value: "15+",
+    label: "Projects Done"
+  },
+  {
+    value: "10+",
+    label: "Technologies"
+  }
+];
+
+// ==============================
+// Navigation Links
+// ==============================
+export const NAV_LINKS = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "services", label: "Services" },
+  { id: "contact", label: "Contact" }
+];
+
+// ==============================
 // Social Links
+// ==============================
 export const SOCIAL_LINKS = [
   {
     id: "github",
@@ -67,7 +104,9 @@ export const SOCIAL_LINKS = [
   }
 ];
 
+// ==============================
 // Skills Summary
+// ==============================
 export const SKILLS_SUMMARY = {
   frontend: ["HTML5", "CSS3", "JavaScript", "React.js", "Vue.js", "TypeScript"],
   backend: ["Java", "PHP", "Python", "Node.js"],
@@ -76,7 +115,9 @@ export const SKILLS_SUMMARY = {
   tools: ["Git", "GitHub", "VS Code", "Postman"]
 };
 
+// ==============================
 // Project Categories
+// ==============================
 export const PROJECT_CATEGORIES = [
   "All",
   "Web Development",
@@ -86,10 +127,12 @@ export const PROJECT_CATEGORIES = [
   "Desktop Application"
 ];
 
+// ==============================
 // Contact Info
+// ==============================
 export const CONTACT_INFO = {
   email: PERSONAL_INFO.email,
-  phone: "+94 XX XXX XXXX", // Add your phone if needed
+  phone: "+94 XX XXX XXXX", // Optional
   location: PERSONAL_INFO.location,
   availability: "Available for opportunities"
 };

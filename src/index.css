@@ -72,7 +72,7 @@
     animation: pulse 3s ease-in-out infinite;
   }
 
-  .animate-sprin-slow {
+  .animate-spin-slow {
     animation: spin 8s linear infinite;
   }
 

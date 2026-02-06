@@ -200,4 +200,4 @@ export const projects = [
 ];
 
 
-export const categories = ['All', 'Web Apps', 'UI Concepts', 'Full Stack'];
+export const categories = ['All', 'Web Development', 'Mobile Development', 'Full Stack'];

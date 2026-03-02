@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Facebook, Instagram } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Facebook, Instagram, CheckCircle } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '../../utils/constants';
 import FadeIn from '../animations/Fadein';
 import RadialGradientBackground from '../backgrounds/RadialGradientBackground';
@@ -13,6 +13,7 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -25,13 +26,23 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Create mailto link with form data
+    const mailtoLink = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
     setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
+      setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      alert('Thank you for your message! I will get back to you soon.');
-    }, 1500);
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => setSubmitStatus(null), 5000);
+      setIsSubmitting(false);
+    }, 500);
   };
 
   const contactInfo = [
@@ -153,6 +164,17 @@ const Contact = () => {
             <div className="relative bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-primary/30 transition-all duration-300">
               <h3 className="text-2xl font-semibold text-white mb-6">Send a Message</h3>
               
+              {/* Success Message */}
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-primary/20 border border-primary/30 rounded-xl flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-primary font-medium">Message sent successfully!</p>
+                    <p className="text-primary/80 text-sm mt-1">Thank you for reaching out. I'll get back to you soon.</p>
+                  </div>
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm text-white/60 mb-2">
@@ -224,7 +246,10 @@ const Contact = () => {
                   className="group w-full bg-white hover:bg-white/90 text-black rounded-full px-8 py-4 text-base font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? (
-                    <span>Sending...</span>
+                    <>
+                      <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
+                      <span>Sending...</span>
+                    </>
                   ) : (
                     <>
                       <span>Send Message</span>

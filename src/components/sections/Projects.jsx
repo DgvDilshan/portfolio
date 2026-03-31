@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import {projects, categories} from '../../data/projects';
-import {Briefcase, Sparkles, Target, Globe , Palette, Zap, ChevronLeft, ChevronRight, Smartphone} from 'lucide-react';
+import {Briefcase, Target, Globe, Zap, ChevronLeft, ChevronRight, Smartphone} from 'lucide-react';
 import ProjectCard from '../ui/projectCard';
 import Fadein from '../animations/Fadein';
 
@@ -116,7 +116,7 @@ const Projects = () => {
                                 className="overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar"
                             >
                                 <div className="flex gap-6 pb-4">
-                                    {filteredProjects.map((project,index) => (
+                                    {filteredProjects.map((project) => (
                                         <div 
                                         key={project.id} 
                                         className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start" 

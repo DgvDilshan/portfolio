@@ -1,13 +1,13 @@
-import React, { Children } from 'react'
+import React from 'react'
 import {useScrollReveal} from '../../hooks/useScrollReveal'
 
-const ScrollReveal = (
-  Children,
+const ScrollReveal = ({
+  children,
   Animation = 'fadeUp',
   delay = 0,
   duration = 700,
-) => {
-  const { ref, isVisible } = useScrollReveal({
+}) => {
+  const { ref, isRevealed } = useScrollReveal({
     threshold: 0.1,
   });
 
@@ -24,14 +24,14 @@ const ScrollReveal = (
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out ${isVisible ? visibleClasses : animationClasses[Animation]} ${`duration-${duration} delay-${delay}`}`}
+      className={`transition-all ease-out ${isRevealed ? visibleClasses : animationClasses[Animation]}`}
 
       style={{
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`
       }}
     >
-      {Children}
+      {children}
     </div>
   )
 

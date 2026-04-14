@@ -1,50 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {projects, categories} from '../../data/projects';
-import {Briefcase, Target, Globe, Zap, ChevronLeft, ChevronRight, Smartphone} from 'lucide-react';
+import {Briefcase, Target, Globe, Zap, Smartphone} from 'lucide-react';
 import ProjectCard from '../ui/projectCard';
 import Fadein from '../animations/Fadein';
+import ScrollReveal from '../animations/ScrollReveal';
 
 
 const Projects = () => {
 
     const [activeCategory, setActiveCategory] = useState('All');
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const scrollContainerRef = useRef(null);
 
     const filteredProjects = activeCategory === 'All'
         ? projects
         : projects.filter(project => project.category === activeCategory);
 
-        //Reset corousel when category changes
+        //Reset when category changes
         const handleCategoryChange = (category) => {
             setActiveCategory(category);
-            setCurrentIndex(0);
-            if (scrollContainerRef.current) {
-                scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-            }
-        };
-
-        const scrollToIndex = (index) => {
-            setCurrentIndex(index);
-            if (scrollContainerRef.current) {
-                const container = scrollContainerRef.current;
-                const cardwidth = container.offsetWidth /3;
-                container.scrollTo({
-                    left: cardwidth * index,
-                    behavior: 'smooth'
-                });
-            }
-        };
-
-        const nextSlide = () => {
-            const maxIndex = Math.max(0, filteredProjects.length - 3);
-            const newIndex = Math.min(currentIndex + 1, maxIndex);
-            scrollToIndex(newIndex);
-        };
-        
-        const prevSlide = () => {
-            const newIndex = Math.max(currentIndex - 1, 0);
-            scrollToIndex(newIndex);
         };
 
         //category icons mapping
@@ -108,65 +80,26 @@ const Projects = () => {
                         </div>
                     </Fadein>
                     
-                    {/* Projects Carousel */}
+                    {/* Projects Grid */}
                     <Fadein delay={200}>
-                        <div className="relative">
-                            <div
-                                ref={scrollContainerRef}
-                                className="overflow-x-auto scroll-smooth snap-x snap-mandatory hide-scrollbar"
-                            >
-                                <div className="flex gap-6 pb-4">
-                                    {filteredProjects.map((project) => (
-                                        <div 
-                                        key={project.id} 
-                                        className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start" 
-                                        >
-                                            <ProjectCard project={project} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Navigation Arrows */}
-                            {filteredProjects.length > 3 && (
-                                <>
-                                 <button
-                                    onClick={prevSlide}
-                                    disabled={currentIndex === 0}
-                                    className="flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 lg:-translate-x-4 items-center justify-center w-10 h-10 lg:w-12 lg:h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10"
-                                    aria-label="Previous projects"
-                                    >
-                                    <ChevronLeft className="w-6 h-6 text-white"/>
-                                    </button>
-
-                                    <button
-                                    onClick={nextSlide}
-                                    disabled={currentIndex >= filteredProjects.length - 3}
-                                    className="flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 lg:translate-x-4 items-center justify-center w-10 h-10 lg:w-12 lg:h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full hover:bg-white/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed z-10"
-                                    aria-label="Next projects"
-                                    >
-                                    <ChevronRight className="w-6 h-6 text-white"/>
-                                    </button>
-                                </>
-                            )}
-
-                            {/* Navigation Dots */}
-                            {filteredProjects.length > 3 && (
-                                <div className="flex items-center justify-center gap-2 mt-8">
-                                    {Array.from({ length: Math.max(0, filteredProjects.length - 2) }).map((_, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => scrollToIndex(index)}
-                                            className={`transition-all duration-300 rounded-full ${index === currentIndex 
-                                                ? 'bg-primary w-6 h-2'
-                                                : 'bg-white/30 w-2 h-2 hover:bg-white/50'
-                                            }`}
-                                            aria-label={`Go to slide ${index + 1}`}
-                                        />
-                                    ))}
-                            </div>
-                            )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredProjects.map((project, index) => (
+                                <ScrollReveal 
+                                    key={project.id}
+                                    Animation="fadeUp"
+                                    delay={index * 100}
+                                    duration={700}
+                                >
+                                    <ProjectCard project={project} />
+                                </ScrollReveal>
+                            ))}
                         </div>
+
+                        {filteredProjects.length === 0 && (
+                            <div className="text-center py-12">
+                                <p className="text-white/60 text-lg">No projects found in this category.</p>
+                            </div>
+                        )}
                     </Fadein>
                 </div>
             </section>
